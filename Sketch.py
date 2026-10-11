@@ -116,6 +116,7 @@ class Sketch(CanvasBase):
     select_obj_index: int = -1  # index of selected component in self.components
     select_axis_index: int = -1  # index of selected axis
     select_color: list[ColorType.ColorType] = [ColorType.ColorType(1, 0, 0), ColorType.ColorType(0, 1, 0), ColorType.ColorType(0, 0, 1)]
+    selected_components = []
 
     # If you are having trouble rotating the camera, try increasing this parameter
     # (Windows users with trackpads may need this)
@@ -454,6 +455,46 @@ class Sketch(CanvasBase):
             self.select_obj_index = -1
             self.select_axis_index = -1
             self.update()
+        if chr(keycode) == "1":
+            if selected:
+                selected.reset("color") 
+
+            if (selected == self.components["upperLeftLegLink1"]):
+                self.select_obj_index = -1
+                self.select_axis_index = -1
+            else:
+                selected = self.components["upperLeftLegLink1"]
+                self.select_obj_index = components_list.index(selected)
+                self.select_axis_index = 0
+                selected.setCurrentColor(self.select_color[self.select_axis_index])
+            self.update()
+        if chr(keycode) == "2":
+            if selected:
+                selected.reset("color") 
+
+            if (selected == self.components["upperRightLegLink1"]):
+                self.select_obj_index = -1
+                self.select_axis_index = -1
+            else:
+                selected = self.components["upperRightLegLink1"]
+                self.select_obj_index = components_list.index(selected)
+                self.select_axis_index = 0
+                selected.setCurrentColor(self.select_color[self.select_axis_index])
+            self.update()
+        if chr(keycode) == "3":
+            if selected:
+                selected.reset("color") 
+
+            if (selected == self.components["body"]):
+                self.select_obj_index = -1
+                self.select_axis_index = -1
+            else:
+                selected = self.components["body"]
+                self.select_obj_index = components_list.index(selected)
+                self.select_axis_index = 0
+                selected.setCurrentColor(self.select_color[self.select_axis_index])
+            self.update()
+
 
 
 if __name__ == "__main__":
