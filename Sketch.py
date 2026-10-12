@@ -113,10 +113,10 @@ class Sketch(CanvasBase):
     Z_NEAR: float = 0.1
     Z_FAR: float = 100
 
-    select_obj_index: int = -1  # index of selected component in self.components
+    # Changed to a list so the user can select multiple components.
+    select_obj_index = []  # contains the index/indicies of selected component(s) in self.components.
     select_axis_index: int = -1  # index of selected axis
     select_color: list[ColorType.ColorType] = [ColorType.ColorType(1, 0, 0), ColorType.ColorType(0, 1, 0), ColorType.ColorType(0, 0, 1)]
-    selected_components = []
 
     # If you are having trouble rotating the camera, try increasing this parameter
     # (Windows users with trackpads may need this)
@@ -257,7 +257,8 @@ class Sketch(CanvasBase):
 
         return
 
-    def Interrupt_Scroll(self, wheelRotation: int) -> None:
+    # Changed the interrupt_scroll function to include a parameter for the component that must be rotated.
+    def Interrupt_Scroll(self, wheelRotation: int, component) -> None:
         """
         When mouse wheel rotating detected, do following things
 
@@ -267,11 +268,10 @@ class Sketch(CanvasBase):
         if wheelRotation == 0:
             return
         wheelChange = wheelRotation / abs(wheelRotation)  # normalize wheel change
-        if self.select_obj_index != -1:
-            components_list = list(self.components.values())
-            selected = components_list[self.select_obj_index]
-            selected.rotate(wheelChange * self.MOUSE_SCROLL_SPEED,
-                                selected.axisBucket[self.select_axis_index])
+
+        # Simply call rotate on the component that is being passed in.
+        component.rotate(wheelChange * self.MOUSE_SCROLL_SPEED,
+                            component.axisBucket[self.select_axis_index])
         self.update()
 
     def unprojectCanvas(self, x: int, y: int, u: float = 0.5) -> Point:
@@ -403,46 +403,34 @@ class Sketch(CanvasBase):
         # part of your creature is just self.components["leg1"].
 
         components_list = list(self.components.values())
-        selected = None if self.select_obj_index == -1 else components_list[self.select_obj_index]
 
-        if keycode in [wx.WXK_RETURN]:
-            # enter component editing mode
-            self.select_axis_index = 0
-            if len(self.components) > 0:
-                # reset color of last selected component
-                if selected:
-                    selected.reset("color")
-                # set new selected component & its color
-                self.select_obj_index = (self.select_obj_index + 1) % len(components_list)
-                selected = components_list[self.select_obj_index]
-                selected.setCurrentColor(self.select_color[self.select_axis_index])
-            self.update()
+        # Selected should contain all the components that are referenced in self.select_obj_index.
+        selected = [components_list[i] for i in self.select_obj_index]
+
         if keycode in [wx.WXK_LEFT]:
             # Last rotation axis of this component
-            if selected:
-                self.select_axis_index = (self.select_axis_index - 1) % 3
-                selected.setCurrentColor(self.select_color[self.select_axis_index])
+
+            # For the code in this if statement and the next one, self.select_axis_index must remain
+            # out of the for loop so it doesn't change multiple times.
+            self.select_axis_index = (self.select_axis_index - 1) % 3
+            for component in selected:
+                component.setCurrentColor(self.select_color[self.select_axis_index])
                 self.update()
         if keycode in [wx.WXK_RIGHT]:
             # Next rotation axis of this component
-            if selected:
-                self.select_axis_index = (self.select_axis_index + 1) % 3
-                selected.setCurrentColor(self.select_color[self.select_axis_index])
+            self.select_axis_index = (self.select_axis_index + 1) % 3
+            for component in selected:
+                component.setCurrentColor(self.select_color[self.select_axis_index])
                 self.update()
         if keycode in [wx.WXK_UP]:
             # Increase rotation angle
-            self.Interrupt_Scroll(1)
+            for component in selected:
+                self.Interrupt_Scroll(1, component)
             self.update()
         if keycode in [wx.WXK_DOWN]:
             # Decrease rotation angle
-            self.Interrupt_Scroll(-1)
-            self.update()
-        if keycode in [wx.WXK_ESCAPE]:
-            # exit component editing mode
-            if selected:
-                selected.reset("color")
-            self.select_obj_index = -1
-            self.select_axis_index = -1
+            for component in selected:
+                self.Interrupt_Scroll(-1, component)
             self.update()
         if chr(keycode) in "r":
             # reset viewing angle only
@@ -452,48 +440,111 @@ class Sketch(CanvasBase):
             for c in self.components.values():
                 c.reset()
             self.resetView()
-            self.select_obj_index = -1
+            self.select_obj_index = []
             self.select_axis_index = -1
             self.update()
-        if chr(keycode) == "1":
-            if selected:
-                selected.reset("color") 
 
-            if (selected == self.components["upperLeftLegLink1"]):
-                self.select_obj_index = -1
-                self.select_axis_index = -1
+        
+        if chr(keycode) == "1":
+            component = self.components["upperLeftLegLink1"]
+            index = components_list.index(component)
+
+            if index in self.select_obj_index:
+                component.reset("color")
+                self.select_obj_index.remove(index)
             else:
-                selected = self.components["upperLeftLegLink1"]
-                self.select_obj_index = components_list.index(selected)
+                # Select this component
+                self.select_obj_index.append(index)
                 self.select_axis_index = 0
-                selected.setCurrentColor(self.select_color[self.select_axis_index])
+                component.setCurrentColor(self.select_color[self.select_axis_index])
+
+            # Reset axis selection if nothing remains selected. The code
+            # not self.select_obj_index will return true if it is empty.
+            if not self.select_obj_index:
+                self.select_axis_index = -1
+
             self.update()
         if chr(keycode) == "2":
-            if selected:
-                selected.reset("color") 
+            component = self.components["upperRightLegLink1"]
+            index = components_list.index(component)
 
-            if (selected == self.components["upperRightLegLink1"]):
-                self.select_obj_index = -1
-                self.select_axis_index = -1
+            if index in self.select_obj_index:
+                # Deselect this component
+                component.reset("color")
+                self.select_obj_index.remove(index)
             else:
-                selected = self.components["upperRightLegLink1"]
-                self.select_obj_index = components_list.index(selected)
+                # Select this component
+                self.select_obj_index.append(index)
                 self.select_axis_index = 0
-                selected.setCurrentColor(self.select_color[self.select_axis_index])
+                component.setCurrentColor(self.select_color[self.select_axis_index])
+
+            # Reset axis selection if nothing remains selected
+            if not self.select_obj_index:
+                self.select_axis_index = -1
+
             self.update()
+
         if chr(keycode) == "3":
-            if selected:
-                selected.reset("color") 
+            component = self.components["middleLeftLegLink1"]
+            index = components_list.index(component)
 
-            if (selected == self.components["body"]):
-                self.select_obj_index = -1
-                self.select_axis_index = -1
+            if index in self.select_obj_index:
+                # Deselect this component
+                component.reset("color")
+                self.select_obj_index.remove(index)
             else:
-                selected = self.components["body"]
-                self.select_obj_index = components_list.index(selected)
+                # Select this component
+                self.select_obj_index.append(index)
                 self.select_axis_index = 0
-                selected.setCurrentColor(self.select_color[self.select_axis_index])
+                component.setCurrentColor(self.select_color[self.select_axis_index])
+
+            # Reset axis selection if nothing remains selected
+            if not self.select_obj_index:
+                self.select_axis_index = -1
+
             self.update()
+
+        if chr(keycode) == "4":
+            component = self.components["middleRightLegLink1"]
+            index = components_list.index(component)
+
+            if index in self.select_obj_index:
+                # Deselect this component
+                component.reset("color")
+                self.select_obj_index.remove(index)
+            else:
+                # Select this component
+                self.select_obj_index.append(index)
+                self.select_axis_index = 0
+                component.setCurrentColor(self.select_color[self.select_axis_index])
+
+            # Reset axis selection if nothing remains selected
+            if not self.select_obj_index:
+                self.select_axis_index = -1
+
+            self.update()
+
+        if chr(keycode) == "5":
+            component = self.components["tailPart1"]
+            index = components_list.index(component)
+
+            if index in self.select_obj_index:
+                # Deselect this component
+                component.reset("color")
+                self.select_obj_index.remove(index)
+            else:
+                # Select this component
+                self.select_obj_index.append(index)
+                self.select_axis_index = 0
+                component.setCurrentColor(self.select_color[self.select_axis_index])
+
+            # Reset axis selection if nothing remains selected
+            if not self.select_obj_index:
+                self.select_axis_index = -1
+
+            self.update()
+
+
 
 
 

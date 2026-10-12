@@ -66,32 +66,32 @@ class ModelLinkage(Component):
 
         tooth2 = Cone(Point(0.25, -0.2, 0.5), shaderProg, [0.03, 0.1, 0.2], Ct.RED)
 
-        tailPart1 = Sphere(Point(0, 0.15, -0.93), shaderProg, [0.2, 0.2, 0.2], Ct.CYAN)
-        tailPart2 = Cone(Point(0, 0, 0.8), shaderProg, [0.15, 0.15, 0.8], Ct.BLUE)
+        tailPart1 = Sphere(Point(0, 0.15, -0.97), shaderProg, [-0.2, -0.2, -0.2], Ct.CYAN)
+        tailPart2 = Cone(Point(0, 0.1, 0.7), shaderProg, [0.15, 0.15, 0.8], Ct.BLUE)
         
-        upperLeftLegLink1 = Cylinder(Point(-1.1, -0.2, 0.8), shaderProg, [0.13, 0.13, 0.4], Ct.YELLOW)
-        upperLeftLegLink2 = Cylinder(Point(0, -0.17, -0.63), shaderProg, [0.13, 0.13, 0.35], Ct.BLUE)
-        upperLeftLegLink3 = Cylinder(Point(0, -0.08, -0.37), shaderProg, [0.13, 0.13, 0.1], Ct.YELLOW)
+        upperLeftLegLink1 = Cylinder(Point(0.5, 0, 0.8), shaderProg, [0.13, 0.13, 0.4], Ct.YELLOW)
+        upperLeftLegLink2 = Cylinder(Point(0, 0, 0.63), shaderProg, [0.13, 0.13, 0.35], Ct.BLUE)
+        upperLeftLegLink3 = Cylinder(Point(0, 0, 0.37), shaderProg, [0.13, 0.13, 0.1], Ct.YELLOW)
 
-        middleLeftLegLink1 = Cylinder(Point(-1.1, -0.2, 0.3), shaderProg, [0.13, 0.13, 0.4], Ct.YELLOW)
-        middleLeftLegLink2 = Cylinder(Point(0, -0.17, -0.63), shaderProg, [0.13, 0.13, 0.35], Ct.BLUE)
-        middleLeftLegLink3 = Cylinder(Point(0, -0.08, -0.37), shaderProg, [0.13, 0.13, 0.1], Ct.YELLOW)
+        middleLeftLegLink1 = Cylinder(Point(0.5, 0, 0.3), shaderProg, [0.13, 0.13, 0.4], Ct.YELLOW)
+        middleLeftLegLink2 = Cylinder(Point(0, 0, 0.63), shaderProg, [0.13, 0.13, 0.35], Ct.BLUE)
+        middleLeftLegLink3 = Cylinder(Point(0, 0, 0.37), shaderProg, [0.13, 0.13, 0.1], Ct.YELLOW)
 
-        lowerLeftLegLink1 = Cylinder(Point(-1.1, -0.2, -0.2), shaderProg, [0.13, 0.13, 0.4], Ct.YELLOW)
-        lowerLeftLegLink2 = Cylinder(Point(0, -0.17, -0.63), shaderProg, [0.13, 0.13, 0.35], Ct.BLUE)
-        lowerLeftLegLink3 = Cylinder(Point(0, -0.08, -0.37), shaderProg, [0.13, 0.13, 0.1], Ct.YELLOW)
+        lowerLeftLegLink1 = Cylinder(Point(0.3, 0, -0.2), shaderProg, [0.13, 0.13, 0.4], Ct.YELLOW)
+        lowerLeftLegLink2 = Cylinder(Point(0, 0, 0.63), shaderProg, [0.13, 0.13, 0.35], Ct.BLUE)
+        lowerLeftLegLink3 = Cylinder(Point(0, 0, 0.37), shaderProg, [0.13, 0.13, 0.1], Ct.YELLOW)
 
-        upperRightLegLink1 = Cylinder(Point(1.1, -0.2, 0.8), shaderProg, [0.13, 0.13, 0.4], Ct.YELLOW)
-        upperRightLegLink2 = Cylinder(Point(0, -0.17, -0.63), shaderProg, [0.13, 0.13, 0.35], Ct.BLUE)
-        upperRightLegLink3 = Cylinder(Point(0, -0.08, -0.37), shaderProg, [0.13, 0.13, 0.1], Ct.YELLOW)
+        upperRightLegLink1 = Cylinder(Point(-0.5, 0, 0.8), shaderProg, [0.13, 0.13, 0.4], Ct.YELLOW)
+        upperRightLegLink2 = Cylinder(Point(0, 0, 0.63), shaderProg, [0.13, 0.13, 0.35], Ct.BLUE)
+        upperRightLegLink3 = Cylinder(Point(0, 0, 0.37), shaderProg, [0.13, 0.13, 0.1], Ct.YELLOW)
 
-        middleRightLegLink1 = Cylinder(Point(1.1, -0.2, 0.3), shaderProg, [0.13, 0.13, 0.4], Ct.YELLOW)
-        middleRightLegLink2 = Cylinder(Point(0, -0.17, -0.63), shaderProg, [0.13, 0.13, 0.35], Ct.BLUE)
-        middleRightLegLink3 = Cylinder(Point(0, -0.08, -0.37), shaderProg, [0.13, 0.13, 0.1], Ct.YELLOW)
+        middleRightLegLink1 = Cylinder(Point(-0.5, 0, 0.3), shaderProg, [0.13, 0.13, 0.4], Ct.YELLOW)
+        middleRightLegLink2 = Cylinder(Point(0, 0, 0.63), shaderProg, [0.13, 0.13, 0.35], Ct.BLUE)
+        middleRightLegLink3 = Cylinder(Point(0, 0, 0.37), shaderProg, [0.13, 0.13, 0.1], Ct.YELLOW)
 
-        lowerRightLegLink1 = Cylinder(Point(1.1, -0.2, -0.2), shaderProg, [0.13, 0.13, 0.4], Ct.YELLOW)
-        lowerRightLegLink2 = Cylinder(Point(0, -0.17, -0.63), shaderProg, [0.13, 0.13, 0.35], Ct.BLUE)
-        lowerRightLegLink3 = Cylinder(Point(0, -0.08, -0.37), shaderProg, [0.13, 0.13, 0.1], Ct.YELLOW)
+        lowerRightLegLink1 = Cylinder(Point(-0.3, 0, -0.2), shaderProg, [0.13, 0.13, 0.4], Ct.YELLOW)
+        lowerRightLegLink2 = Cylinder(Point(0, 0, 0.63), shaderProg, [0.13, 0.13, 0.35], Ct.BLUE)
+        lowerRightLegLink3 = Cylinder(Point(0, 0, 0.37), shaderProg, [0.13, 0.13, 0.1], Ct.YELLOW)
 
         # uAxis = y, vAxis = x, wAxis = z
         tooth1.rotate(30, self.uAxis)
@@ -103,37 +103,43 @@ class ModelLinkage(Component):
         tailPart2.rotate(220, self.uAxis)
 
         upperLeftLegLink1.rotate(90, self.vAxis)
-        upperLeftLegLink1.rotate(-20, self.uAxis)
-        upperLeftLegLink2.rotate(-20, self.uAxis)
-        upperLeftLegLink3.rotate(-30, self.uAxis)
+        upperLeftLegLink1.rotate(20, self.uAxis)
+        upperLeftLegLink2.rotate(20, self.uAxis)
+        upperLeftLegLink3.rotate(30, self.uAxis)
 
         middleLeftLegLink1.rotate(90, self.vAxis)
-        middleLeftLegLink1.rotate(-20, self.uAxis)
-        middleLeftLegLink2.rotate(-20, self.uAxis)
-        middleLeftLegLink3.rotate(-30, self.uAxis)
+        middleLeftLegLink1.rotate(20, self.uAxis)
+        middleLeftLegLink2.rotate(20, self.uAxis)
+        middleLeftLegLink3.rotate(30, self.uAxis)
 
         lowerLeftLegLink1.rotate(90, self.vAxis)
-        lowerLeftLegLink1.rotate(-20, self.uAxis)
-        lowerLeftLegLink2.rotate(-20, self.uAxis)
-        lowerLeftLegLink3.rotate(-30, self.uAxis)
+        lowerLeftLegLink1.rotate(20, self.uAxis)
+        lowerLeftLegLink2.rotate(20, self.uAxis)
+        lowerLeftLegLink3.rotate(30, self.uAxis)
 
         upperRightLegLink1.rotate(180, self.vAxis)
+        upperRightLegLink1.rotate(180, self.uAxis)
+        upperRightLegLink1.rotate(180, self.wAxis)
         upperRightLegLink1.rotate(90, self.vAxis)
-        upperRightLegLink1.rotate(-20, self.uAxis)
-        upperRightLegLink2.rotate(-20, self.uAxis)
-        upperRightLegLink3.rotate(-30, self.uAxis)
-
+        upperRightLegLink1.rotate(20, self.uAxis)
+        upperRightLegLink2.rotate(20, self.uAxis)
+        upperRightLegLink3.rotate(30, self.uAxis)
+   
         middleRightLegLink1.rotate(180, self.vAxis)
         middleRightLegLink1.rotate(90, self.vAxis)
-        middleRightLegLink1.rotate(-20, self.uAxis)
-        middleRightLegLink2.rotate(-20, self.uAxis)
-        middleRightLegLink3.rotate(-30, self.uAxis)
+        middleRightLegLink1.rotate(20, self.uAxis)
+        middleRightLegLink2.rotate(20, self.uAxis)
+        middleRightLegLink3.rotate(30, self.uAxis)
+        middleRightLegLink1.rotate(180, self.uAxis)
+        middleRightLegLink1.rotate(180, self.wAxis)
 
         lowerRightLegLink1.rotate(180, self.vAxis)
         lowerRightLegLink1.rotate(90, self.vAxis)
-        lowerRightLegLink1.rotate(-20, self.uAxis)
-        lowerRightLegLink2.rotate(-20, self.uAxis)
-        lowerRightLegLink3.rotate(-30, self.uAxis)
+        lowerRightLegLink1.rotate(20, self.uAxis)
+        lowerRightLegLink2.rotate(20, self.uAxis)
+        lowerRightLegLink3.rotate(30, self.uAxis)
+        lowerRightLegLink1.rotate(180, self.uAxis)
+        lowerRightLegLink1.rotate(180, self.wAxis)
 
 
         # link1 = Cube(Point(0, 0, 0), shaderProg, [0.2, 0.2, linkageLength], Ct.DARKORANGE1)
@@ -233,29 +239,29 @@ class ModelLinkage(Component):
         #      so that creature won't intersect itself or bend in unnatural ways
         #   2. Orientation of joint rotations for the left and right parts should mirror each other.
 
-        upperLeftLegLink1.setRotateExtent(upperLeftLegLink1.uAxis, -40, 40)
-        middleLeftLegLink1.setRotateExtent(upperLeftLegLink1.uAxis, -40, 40)
-        lowerLeftLegLink1.setRotateExtent(upperLeftLegLink1.uAxis, -40, 40)
+        # upperLeftLegLink1.setRotateExtent(upperLeftLegLink1.uAxis, -40, 40)
+        # middleLeftLegLink1.setRotateExtent(upperLeftLegLink1.uAxis, -40, 40)
+        # lowerLeftLegLink1.setRotateExtent(upperLeftLegLink1.uAxis, -40, 40)
 
-        upperLeftLegLink1.setRotateExtent(upperLeftLegLink1.vAxis, -40, 40)
-        middleLeftLegLink1.setRotateExtent(upperLeftLegLink1.vAxis, -40, 40)
-        lowerLeftLegLink1.setRotateExtent(upperLeftLegLink1.vAxis, -40, 40)
+        # upperLeftLegLink1.setRotateExtent(upperLeftLegLink1.vAxis, -40, 40)
+        # middleLeftLegLink1.setRotateExtent(upperLeftLegLink1.vAxis, -40, 40)
+        # lowerLeftLegLink1.setRotateExtent(upperLeftLegLink1.vAxis, -40, 40)
 
-        upperLeftLegLink1.setRotateExtent(upperLeftLegLink1.wAxis, -40, 40)
-        middleLeftLegLink1.setRotateExtent(upperLeftLegLink1.wAxis, -40, 40)
-        lowerLeftLegLink1.setRotateExtent(upperLeftLegLink1.wAxis, -40, 40)
+        # upperLeftLegLink1.setRotateExtent(upperLeftLegLink1.wAxis, -40, 40)
+        # middleLeftLegLink1.setRotateExtent(upperLeftLegLink1.wAxis, -40, 40)
+        # lowerLeftLegLink1.setRotateExtent(upperLeftLegLink1.wAxis, -40, 40)
 
-        upperRightLegLink1.setRotateExtent(upperRightLegLink1.uAxis, -40, 40)
-        middleRightLegLink1.setRotateExtent(upperRightLegLink1.uAxis, -40, 40)
-        lowerLeftLegLink1.setRotateExtent(upperLeftLegLink1.uAxis, -40, 40)
+        # upperRightLegLink1.setRotateExtent(upperRightLegLink1.uAxis, -40, 40)
+        # middleRightLegLink1.setRotateExtent(upperRightLegLink1.uAxis, -40, 40)
+        # lowerLeftLegLink1.setRotateExtent(upperLeftLegLink1.uAxis, -40, 40)
 
-        upperRightLegLink1.setRotateExtent(upperRightLegLink1.vAxis, -40, 40)
-        middleRightLegLink1.setRotateExtent(upperRightLegLink1.vAxis, -40, 40)
-        lowerLeftLegLink1.setRotateExtent(upperLeftLegLink1.vAxis, -40, 40)
+        # upperRightLegLink1.setRotateExtent(upperRightLegLink1.vAxis, -40, 40)
+        # middleRightLegLink1.setRotateExtent(upperRightLegLink1.vAxis, -40, 40)
+        # lowerLeftLegLink1.setRotateExtent(upperLeftLegLink1.vAxis, -40, 40)
 
-        upperRightLegLink1.setRotateExtent(upperRightLegLink1.wAxis, -40, 40)
-        middleRightLegLink1.setRotateExtent(upperRightLegLink1.wAxis, -40, 40)
-        lowerRightLegLink1.setRotateExtent(upperRightLegLink1.wAxis, -40, 40)
+        # upperRightLegLink1.setRotateExtent(upperRightLegLink1.wAxis, -40, 40)
+        # middleRightLegLink1.setRotateExtent(upperRightLegLink1.wAxis, -40, 40)
+        # lowerRightLegLink1.setRotateExtent(upperRightLegLink1.wAxis, -40, 40)
 
         
         
