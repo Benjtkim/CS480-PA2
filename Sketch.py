@@ -444,105 +444,77 @@ class Sketch(CanvasBase):
             self.select_axis_index = -1
             self.update()
 
-        
         if chr(keycode) == "1":
-            component = self.components["upperLeftLegLink1"]
-            index = components_list.index(component)
+            self.select_or_deselect_component("face", components_list)
 
-            if index in self.select_obj_index:
-                component.reset("color")
-                self.select_obj_index.remove(index)
-            else:
-                # Select this component
-                self.select_obj_index.append(index)
-                self.select_axis_index = 0
-                component.setCurrentColor(self.select_color[self.select_axis_index])
-
-            # Reset axis selection if nothing remains selected. The code
-            # not self.select_obj_index will return true if it is empty.
-            if not self.select_obj_index:
-                self.select_axis_index = -1
-
-            self.update()
         if chr(keycode) == "2":
-            component = self.components["upperRightLegLink1"]
-            index = components_list.index(component)
-
-            if index in self.select_obj_index:
-                # Deselect this component
-                component.reset("color")
-                self.select_obj_index.remove(index)
-            else:
-                # Select this component
-                self.select_obj_index.append(index)
-                self.select_axis_index = 0
-                component.setCurrentColor(self.select_color[self.select_axis_index])
-
-            # Reset axis selection if nothing remains selected
-            if not self.select_obj_index:
-                self.select_axis_index = -1
-
-            self.update()
+            self.select_or_deselect_component("eye1", components_list)
 
         if chr(keycode) == "3":
-            component = self.components["middleLeftLegLink1"]
-            index = components_list.index(component)
-
-            if index in self.select_obj_index:
-                # Deselect this component
-                component.reset("color")
-                self.select_obj_index.remove(index)
-            else:
-                # Select this component
-                self.select_obj_index.append(index)
-                self.select_axis_index = 0
-                component.setCurrentColor(self.select_color[self.select_axis_index])
-
-            # Reset axis selection if nothing remains selected
-            if not self.select_obj_index:
-                self.select_axis_index = -1
-
-            self.update()
+            self.select_or_deselect_component("eye2", components_list)
 
         if chr(keycode) == "4":
-            component = self.components["middleRightLegLink1"]
-            index = components_list.index(component)
-
-            if index in self.select_obj_index:
-                # Deselect this component
-                component.reset("color")
-                self.select_obj_index.remove(index)
-            else:
-                # Select this component
-                self.select_obj_index.append(index)
-                self.select_axis_index = 0
-                component.setCurrentColor(self.select_color[self.select_axis_index])
-
-            # Reset axis selection if nothing remains selected
-            if not self.select_obj_index:
-                self.select_axis_index = -1
-
-            self.update()
+            self.select_or_deselect_component("pupil1", components_list)
 
         if chr(keycode) == "5":
-            component = self.components["tailPart1"]
-            index = components_list.index(component)
+            self.select_or_deselect_component("pupil2", components_list)
 
-            if index in self.select_obj_index:
-                # Deselect this component
-                component.reset("color")
-                self.select_obj_index.remove(index)
-            else:
-                # Select this component
-                self.select_obj_index.append(index)
-                self.select_axis_index = 0
-                component.setCurrentColor(self.select_color[self.select_axis_index])
+        if chr(keycode) == "6":
+                self.select_or_deselect_component("tooth1", components_list)
 
-            # Reset axis selection if nothing remains selected
-            if not self.select_obj_index:
-                self.select_axis_index = -1
+        if chr(keycode) == "7":
+                self.select_or_deselect_component("tooth2", components_list)
 
-            self.update()
+        if chr(keycode) == "8":
+            self.select_or_deselect_component("body", components_list)
+
+        if chr(keycode) == "9":
+            self.select_or_deselect_component("upperLeftLegLink1", components_list)
+
+        if chr(keycode) == "0":
+            self.select_or_deselect_component("upperLeftLegLink2", components_list)
+
+        if chr(keycode) == "a":
+            self.select_or_deselect_component("upperLeftLegLink3", components_list)
+
+        if chr(keycode) == "s":
+            self.select_or_deselect_component("upperRightLegLink1", components_list)
+
+        if chr(keycode) == "d":
+            self.select_or_deselect_component("middleLeftLegLink1", components_list)
+
+        if chr(keycode) == "f":
+            self.select_or_deselect_component("middleRightLegLink1", components_list)
+
+        if chr(keycode) == "g":
+            self.select_or_deselect_component("lowerLeftLegLink1", components_list)
+
+        if chr(keycode) == "h":
+            self.select_or_deselect_component("lowerRightLegLink1", components_list)
+
+        if chr(keycode) == "j":
+            self.select_or_deselect_component("tailPart1", components_list)
+
+
+    def select_or_deselect_component(self, name, components_list):
+        component = self.components[name]
+        index = components_list.index(component)
+
+        if index in self.select_obj_index:
+            # Deselect this component
+            component.reset("color")
+            self.select_obj_index.remove(index)
+        else:
+            # Select this component
+            self.select_obj_index.append(index)
+            self.select_axis_index = 0
+            component.setCurrentColor(self.select_color[self.select_axis_index])
+
+        # Reset axis selection if nothing remains selected
+        if not self.select_obj_index:
+            self.select_axis_index = -1
+
+        self.update()
 
 
 

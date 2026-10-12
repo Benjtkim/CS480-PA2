@@ -93,7 +93,7 @@ class ModelLinkage(Component):
         lowerRightLegLink2 = Cylinder(Point(0, 0, 0.63), shaderProg, [0.13, 0.13, 0.35], Ct.BLUE)
         lowerRightLegLink3 = Cylinder(Point(0, 0, 0.37), shaderProg, [0.13, 0.13, 0.1], Ct.YELLOW)
 
-        # uAxis = y, vAxis = x, wAxis = z
+        # uAxis = x, vAxis = y, wAxis = z
         tooth1.rotate(30, self.uAxis)
         tooth1.rotate(-20, self.vAxis)
 
@@ -102,62 +102,52 @@ class ModelLinkage(Component):
 
         tailPart2.rotate(220, self.uAxis)
 
-        upperLeftLegLink1.rotate(90, self.vAxis)
         upperLeftLegLink1.rotate(20, self.uAxis)
+        upperLeftLegLink1.rotate(90, self.vAxis)
+        
         upperLeftLegLink2.rotate(20, self.uAxis)
+
         upperLeftLegLink3.rotate(30, self.uAxis)
 
-        middleLeftLegLink1.rotate(90, self.vAxis)
         middleLeftLegLink1.rotate(20, self.uAxis)
+        middleLeftLegLink1.rotate(90, self.vAxis)
+
         middleLeftLegLink2.rotate(20, self.uAxis)
+
         middleLeftLegLink3.rotate(30, self.uAxis)
 
-        lowerLeftLegLink1.rotate(90, self.vAxis)
         lowerLeftLegLink1.rotate(20, self.uAxis)
+        lowerLeftLegLink1.rotate(90, self.vAxis)
+        
         lowerLeftLegLink2.rotate(20, self.uAxis)
+
         lowerLeftLegLink3.rotate(30, self.uAxis)
 
-        upperRightLegLink1.rotate(180, self.vAxis)
-        upperRightLegLink1.rotate(180, self.uAxis)
+        upperRightLegLink1.rotate(200, self.uAxis)
+        upperRightLegLink1.rotate(270, self.vAxis)
         upperRightLegLink1.rotate(180, self.wAxis)
-        upperRightLegLink1.rotate(90, self.vAxis)
-        upperRightLegLink1.rotate(20, self.uAxis)
-        upperRightLegLink2.rotate(20, self.uAxis)
-        upperRightLegLink3.rotate(30, self.uAxis)
-   
-        middleRightLegLink1.rotate(180, self.vAxis)
-        middleRightLegLink1.rotate(90, self.vAxis)
-        middleRightLegLink1.rotate(20, self.uAxis)
-        middleRightLegLink2.rotate(20, self.uAxis)
-        middleRightLegLink3.rotate(30, self.uAxis)
-        middleRightLegLink1.rotate(180, self.uAxis)
-        middleRightLegLink1.rotate(180, self.wAxis)
+        upperRightLegLink1.setDefaultW([0, 0, -1])
 
-        lowerRightLegLink1.rotate(180, self.vAxis)
-        lowerRightLegLink1.rotate(90, self.vAxis)
-        lowerRightLegLink1.rotate(20, self.uAxis)
+        upperRightLegLink2.rotate(20, self.uAxis)
+
+        upperRightLegLink3.rotate(30, self.uAxis)
+
+        middleRightLegLink1.rotate(200, self.uAxis)
+        middleRightLegLink1.rotate(270, self.vAxis)
+        middleRightLegLink1.rotate(180, self.wAxis)
+        middleRightLegLink1.setDefaultW([0, 0, -1])
+
+        middleRightLegLink2.rotate(20, self.uAxis)
+
+        middleRightLegLink3.rotate(30, self.uAxis)
+
+        lowerRightLegLink1.rotate(200, self.uAxis)
+        lowerRightLegLink1.rotate(270, self.vAxis)
+        lowerRightLegLink1.rotate(180, self.wAxis)
+        lowerRightLegLink1.setDefaultW([0, 0, -1])
+
         lowerRightLegLink2.rotate(20, self.uAxis)
         lowerRightLegLink3.rotate(30, self.uAxis)
-        lowerRightLegLink1.rotate(180, self.uAxis)
-        lowerRightLegLink1.rotate(180, self.wAxis)
-
-
-        # link1 = Cube(Point(0, 0, 0), shaderProg, [0.2, 0.2, linkageLength], Ct.DARKORANGE1)
-        # putting link2 exactly at (0, 0, 0.95 * linkageLength) would cause z-fighting
-        # across parallel top faces, so we nudge it up by a small (imperceptible) amount
-        # link2 = Cube(Point(0, +1e-4, 0.95 * linkageLength), shaderProg, [0.2, 0.2, linkageLength], Ct.DARKORANGE2)
-        # link3 = Cube(Point(0, -1e-4, 0.95 * linkageLength), shaderProg, [0.2, 0.2, linkageLength], Ct.DARKORANGE3)
-        # link4 = Cube(Point(0, +1e-4, 0.95 * linkageLength), shaderProg, [0.2, 0.2, linkageLength], Ct.DARKORANGE4)
-        # link2.setRotateExtent(link2.uAxis, -40, 40)
-        # link2.setRotateExtent(link2.vAxis, -40, 40)
-        # link3.setRotateExtent(link3.uAxis, -40, 40)
-        # link3.setRotateExtent(link3.vAxis, -40, 40)
-        # link4.setDefaultAngle(90, link4.vAxis)
-        # link4.setRotateExtent(link4.vAxis, -20, 60)
-        # # the preferred way to scale objects is actually with the "size" parameter at creation.
-        # # the following is just a way to ensure one canonical ordering for TODO 1
-        # link4.setDefaultScale((1,1,1.5)) 
-        # self.addChild(link1)
 
         self.addChild(body)
 
@@ -239,30 +229,69 @@ class ModelLinkage(Component):
         #      so that creature won't intersect itself or bend in unnatural ways
         #   2. Orientation of joint rotations for the left and right parts should mirror each other.
 
-        # upperLeftLegLink1.setRotateExtent(upperLeftLegLink1.uAxis, -40, 40)
-        # middleLeftLegLink1.setRotateExtent(upperLeftLegLink1.uAxis, -40, 40)
-        # lowerLeftLegLink1.setRotateExtent(upperLeftLegLink1.uAxis, -40, 40)
+        face.setRotateExtent(face.uAxis, -30, 30)
+        face.setRotateExtent(face.vAxis, -30, 30)
+        face.setRotateExtent(face.wAxis, -30, 30)
 
-        # upperLeftLegLink1.setRotateExtent(upperLeftLegLink1.vAxis, -40, 40)
-        # middleLeftLegLink1.setRotateExtent(upperLeftLegLink1.vAxis, -40, 40)
-        # lowerLeftLegLink1.setRotateExtent(upperLeftLegLink1.vAxis, -40, 40)
+        eye1.setRotateExtent(eye1.uAxis, -30, 30)
+        eye1.setRotateExtent(eye1.vAxis, -30, 30)
+        eye1.setRotateExtent(eye1.wAxis, -30, 30)
 
-        # upperLeftLegLink1.setRotateExtent(upperLeftLegLink1.wAxis, -40, 40)
-        # middleLeftLegLink1.setRotateExtent(upperLeftLegLink1.wAxis, -40, 40)
-        # lowerLeftLegLink1.setRotateExtent(upperLeftLegLink1.wAxis, -40, 40)
+        eye2.setRotateExtent(eye2.uAxis, -30, 30)
+        eye2.setRotateExtent(eye2.vAxis, -30, 30)
+        eye2.setRotateExtent(eye2.wAxis, -30, 30)
 
-        # upperRightLegLink1.setRotateExtent(upperRightLegLink1.uAxis, -40, 40)
-        # middleRightLegLink1.setRotateExtent(upperRightLegLink1.uAxis, -40, 40)
-        # lowerLeftLegLink1.setRotateExtent(upperLeftLegLink1.uAxis, -40, 40)
+        pupil1.setRotateExtent(pupil1.uAxis, -30, 30)
+        pupil1.setRotateExtent(pupil1.vAxis, -30, 30)
+        pupil1.setRotateExtent(pupil1.wAxis, -30, 30)
 
-        # upperRightLegLink1.setRotateExtent(upperRightLegLink1.vAxis, -40, 40)
-        # middleRightLegLink1.setRotateExtent(upperRightLegLink1.vAxis, -40, 40)
-        # lowerLeftLegLink1.setRotateExtent(upperLeftLegLink1.vAxis, -40, 40)
+        pupil2.setRotateExtent(pupil2.uAxis, -30, 30)
+        pupil2.setRotateExtent(pupil2.vAxis, -30, 30)
+        pupil2.setRotateExtent(pupil2.wAxis, -30, 30)
 
-        # upperRightLegLink1.setRotateExtent(upperRightLegLink1.wAxis, -40, 40)
-        # middleRightLegLink1.setRotateExtent(upperRightLegLink1.wAxis, -40, 40)
-        # lowerRightLegLink1.setRotateExtent(upperRightLegLink1.wAxis, -40, 40)
+        tooth1.setRotateExtent(tooth1.uAxis, -5, 30)
+        tooth1.setRotateExtent(tooth1.vAxis, -20, 10)
+        tooth1.setRotateExtent(tooth1.wAxis, -15, 15)
 
+        tooth2.setRotateExtent(tooth2.uAxis, -5, 30)
+        tooth2.setRotateExtent(tooth2.vAxis, -10, 20)
+        tooth2.setRotateExtent(tooth2.wAxis, -15, 15)
+
+        upperLeftLegLink1.setRotateExtent(upperLeftLegLink1.uAxis, -60, 60)
+        upperLeftLegLink1.setRotateExtent(upperLeftLegLink1.vAxis, 50, 100)
+        upperLeftLegLink1.setRotateExtent(upperLeftLegLink1.wAxis, -40, 60)
+
+        upperLeftLegLink2.setRotateExtent(upperLeftLegLink2.uAxis, -30, 30)
+        upperLeftLegLink2.setRotateExtent(upperLeftLegLink2.vAxis, -30, 30)
+        upperLeftLegLink2.setRotateExtent(upperLeftLegLink2.wAxis, -30, 30)
+
+        upperLeftLegLink3.setRotateExtent(upperLeftLegLink3.uAxis, -30, 30)
+        upperLeftLegLink3.setRotateExtent(upperLeftLegLink3.vAxis, -30, 30)
+        upperLeftLegLink3.setRotateExtent(upperLeftLegLink3.wAxis, -30, 30)
+
+        upperRightLegLink1.setRotateExtent(upperRightLegLink1.uAxis, 120, 240)
+        upperRightLegLink1.setRotateExtent(upperRightLegLink1.vAxis, 230, 280)
+        upperRightLegLink1.setRotateExtent(upperRightLegLink1.wAxis, 140, 240)
+
+        middleLeftLegLink1.setRotateExtent(middleLeftLegLink1.uAxis, -60, 60)
+        middleLeftLegLink1.setRotateExtent(middleLeftLegLink1.vAxis, 50, 100)
+        middleLeftLegLink1.setRotateExtent(middleLeftLegLink1.wAxis, -40, 60)
+
+        lowerLeftLegLink1.setRotateExtent(lowerLeftLegLink1.uAxis, -60, 60)
+        lowerLeftLegLink1.setRotateExtent(lowerLeftLegLink1.vAxis, 50, 100)
+        lowerLeftLegLink1.setRotateExtent(lowerLeftLegLink1.wAxis, -40, 60)
+
+        middleRightLegLink1.setRotateExtent(middleRightLegLink1.uAxis, 120, 240)
+        middleRightLegLink1.setRotateExtent(middleRightLegLink1.vAxis, 230, 280)
+        middleRightLegLink1.setRotateExtent(middleRightLegLink1.wAxis, 140, 240)
+
+        lowerRightLegLink1.setRotateExtent(lowerRightLegLink1.uAxis, 120, 240)
+        lowerRightLegLink1.setRotateExtent(lowerRightLegLink1.vAxis, 230, 280)
+        lowerRightLegLink1.setRotateExtent(lowerRightLegLink1.wAxis, 140, 240)
+
+        tailPart1.setRotateExtent(tailPart1.uAxis, -30, 30)
+        tailPart1.setRotateExtent(tailPart1.vAxis, -30, 30)
+        tailPart1.setRotateExtent(tailPart1.wAxis, -30, 30)
         
         
 
